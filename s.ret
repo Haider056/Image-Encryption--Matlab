@@ -1,0 +1,31 @@
+pht= imread('abc.jpg');
+gry=rgb2gray(pht);
+k=[109 72;72 109];
+kinv=[165 248; 248 165];
+Ie=gry(:);
+[M,N]=size(gry);
+n1=size(Ie);
+for i=(1:2:n1)
+    x1=[Ie(i);Ie(i+1)];
+    x1=mod(k*double(x1),256);
+    r(i)=x1(1);
+    r(i+1)=x1(2);
+end
+k1=reshape(r,[M N]);
+k3=uint8(k1);
+ 
+imshow(k3);
+ 
+ 
+ 
+Id=k3(:);
+for i=(1:2:n1)
+    x2=[Id(i);Id(i+1)];
+    x2=mod(kinv*double(x2),256);
+    de(i)=x2(1);
+    de(i+1)=x2(2);
+end
+k2=reshape(de,[M N]);
+k2=uint8(k2);
+subplot(1,2,1),imshow(k3);
+subplot(1,2,2),imshow(k2);
